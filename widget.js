@@ -1,13 +1,7 @@
 (function () {
   const script = document.currentScript;
-  const widgetUrl = script.getAttribute("data-url");
-
-  if (!widgetUrl) {
-    console.error(
-      "Widget URL is missing. Please provide the 'data-url' attribute."
-    );
-    return;
-  }
+  const widgetUrl =
+    script.getAttribute("data-url") || "https://chatbot-steel-pi.vercel.app/"; // Default URL if not provided
 
   if (!widgetUrl.startsWith("https://")) {
     console.error("Widget URL must use HTTPS.");
@@ -27,7 +21,7 @@
   document.body.appendChild(widgetContainer);
 
   const iframe = document.createElement("iframe");
-  iframe.src = widgetUrl;
+  iframe.src = widgetUrl; // Using the dynamic URL here
   iframe.style.width = "400px";
   iframe.style.height = "600px";
   iframe.style.border = "none";
@@ -41,7 +35,7 @@
   closeButton.style.position = "absolute";
   closeButton.style.top = "10px";
   closeButton.style.right = "10px";
-  closeButton.style.background = "#FF4D4D"; // Example red
+  closeButton.style.background = "#FF4D4D";
   closeButton.style.color = "#FFFFFF";
   closeButton.style.border = "none";
   closeButton.style.borderRadius = "50%";
@@ -66,14 +60,14 @@
   openButton.style.bottom = "20px";
   openButton.style.right = "20px";
   openButton.style.padding = "10px 20px";
-  openButton.style.backgroundColor = "#4CAF50"; // Example green
+  openButton.style.backgroundColor = "#4CAF50";
   openButton.style.color = "white";
   openButton.style.border = "none";
   openButton.style.borderRadius = "5px";
   openButton.style.cursor = "pointer";
   openButton.style.zIndex = "9999";
   openButton.style.display =
-    localStorage.getItem("chatbotClosed") === "true" ? "block" : "none"; // Show only if closed
+    localStorage.getItem("chatbotClosed") === "true" ? "block" : "none";
 
   openButton.onclick = () => {
     widgetContainer.style.display = "block";
